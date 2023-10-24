@@ -2,7 +2,7 @@
 #
 # Install an OpenNeuro dataset.
 dataset_id=$1
-base_dir="/cbica/home/salot/datasets"
+base_dir="/cbica/home/salot/open-asl-data/datasets"
 superdataset_dir=${base_dir}/${dataset_id}
 code_dir=`pwd`
 
@@ -33,6 +33,17 @@ cp ${code_dir}/run_aslprep.sh ${superdataset_dir}/code/
 datalad save -m "Add base scripts for preprocessing."
 
 # Push superdataset to G-Node GIN
-datalad create-sibling-gin --siblingname gin --access-protocol ssh \
-    --dataset . ME-ICA/${dataset_id}_superdataset
+datalad create-sibling-gin \
+    --siblingname gin \
+    --access-protocol ssh \
+    --dataset . \
+    PennLINC/${dataset_id}_superdataset
+datalad push --to gin
+
+# Push subdataset to G-Node GIN
+datalad create-sibling-gin \
+    --siblingname gin \
+    --access-protocol ssh \
+    --dataset inputs/data \
+    PennLINC/${dataset_id}_raw
 datalad push --to gin

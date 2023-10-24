@@ -1,2 +1,2 @@
-singularity pull --name /cbica/home/salot/singularity/smriprep-23_1_10.simg docker://nipreps/smriprep:unstable
-singularity pull --name /cbica/home/salot/singularity/aslprep-23_1_5dev.simg docker://pennlinc/aslprep:unstable
+singularity pull --name /cbica/home/salot/open-asl-data/singularity/smriprep-0_12_2.simg docker://nipreps/smriprep:0.12.2
+singularity pull --name /cbica/home/salot/open-asl-data/singularity/aslprep-0_6_0rc1.simg docker://pennlinc/aslprep:0.6.0rc1
