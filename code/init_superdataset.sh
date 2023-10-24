@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # Install an OpenNeuro dataset.
+#
+# Must define DATALAD_CREDENTIAL_GIN_TOKEN environment variable.
 dataset_id=$1
 base_dir="/cbica/home/salot/open-asl-data/datasets"
 superdataset_dir=${base_dir}/${dataset_id}
@@ -37,13 +39,15 @@ datalad create-sibling-gin \
     --siblingname gin \
     --access-protocol ssh \
     --dataset . \
+    --credential GIN \
     PennLINC/${dataset_id}_superdataset
-datalad push --to gin
+datalad push -d . --to gin
 
-# Push subdataset to G-Node GIN
+# Push raw subdataset to G-Node GIN
 datalad create-sibling-gin \
     --siblingname gin \
     --access-protocol ssh \
     --dataset inputs/data \
+    --credential GIN \
     PennLINC/${dataset_id}_raw
-datalad push --to gin
+datalad push -d inputs/data --to gin
